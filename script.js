@@ -1,6 +1,6 @@
 // GitHub Configuration - REPLACE THESE VALUES
 const GIST_ID = '00425639a64c7459ab79885e18446730'; // Your Gist ID
-const GITHUB_TOKEN = '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'; // Replace with your token
+const GITHUB_TOKEN = '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'; // Replace with your token
 const GIST_FILENAME = 'app_data.json';
 
 // App State
