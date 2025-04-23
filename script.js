@@ -29,20 +29,29 @@ const GistService = {
     try {
       const response = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
         headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json'
+          'Authorization': `Bearer ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github+json'
         }
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status} - ${await response.text()}`);
+        const errorDetails = await response.json();
+        throw new Error(`HTTP ${response.status}: ${errorDetails.message}`);
       }
 
       const data = await response.json();
+      if (!data.files || !data.files[GIST_FILENAME]) {
+        throw new Error('Gist file not found');
+      }
+      
       return JSON.parse(data.files[GIST_FILENAME].content);
     } catch (error) {
       console.error('Load failed:', error);
-      return { leaderboard: [], timerState: null };
+      // Return default data structure if loading fails
+      return { 
+        leaderboard: [],
+        timerState: null 
+      };
     }
   },
 
@@ -51,11 +60,12 @@ const GistService = {
       const response = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
         method: 'PATCH',
         headers: {
-          'Authorization': `token ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github.v3+json',
+          'Authorization': `Bearer ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github+json',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          description: 'Timer app data - Last updated: ' + new Date().toISOString(),
           files: {
             [GIST_FILENAME]: {
               content: JSON.stringify(data, null, 2)
@@ -65,7 +75,8 @@ const GistService = {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status} - ${await response.text()}`);
+        const errorDetails = await response.json();
+        throw new Error(`HTTP ${response.status}: ${errorDetails.message}`);
       }
 
       return true;
