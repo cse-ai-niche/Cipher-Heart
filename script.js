@@ -1,6 +1,6 @@
 // GitHub Configuration
 const GIST_ID = '00425639a64c7459ab79885e18446730'; // Your Gist ID
-const GITHUB_TOKEN = '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'; // Replace with your token
+const GITHUB_TOKEN = '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'; // Replace with your token
 const GIST_FILENAME = 'app_data.json';
 
 // Enhanced Gist Service
