@@ -1,5 +1,5 @@
 // GitHub Gist Configuration
-const GIST_ID = '00425639a64c7459ab79885e18446730#file-app_data-json'; // Replace with your actual Gist ID
+const GIST_ID = '00425639a64c7459ab79885e18446730'; // Replace with your actual Gist ID
 const GITHUB_TOKEN = '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'; // Replace with your GitHub token
 const GIST_FILENAME = 'app_data.json';
 
