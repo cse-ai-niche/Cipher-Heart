@@ -1,6 +1,6 @@
 // GitHub Configuration - REPLACE THESE VALUES
 const GIST_ID = '00425639a64c7459ab79885e18446730'; // Your Gist ID
-const GITHUB_TOKEN = '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'; // Replace with your token
+const GITHUB_TOKEN = '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'; // Replace with your token
 const GIST_FILENAME = 'app_data.json';
 
 // App State
@@ -29,8 +29,8 @@ const GistService = {
     try {
       const response = await fetch(`https://api.github.com/gists/${GIST_ID}`, {
         headers: {
-          'Authorization': `Bearer ${GITHUB_TOKEN}`,
-          'Accept': 'application/vnd.github+json'
+          'Authorization': `token ${GITHUB_TOKEN}`,
+          'Accept': 'application/vnd.github.v3+json'
         }
       });
 
